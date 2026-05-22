@@ -2,31 +2,26 @@
 #define CRUD_FUNCTIONS_H
 
 #include <stdio.h>
+#include <stdlib.h> 
+#include <string.h>
 
-typedef struct{
+typedef struct musica {
     int id;
     char nome[100];
     char artista[100];
-    int duracao; // duração em segundos
+    int duracao;    // Duração em segundos
     char genero[50];
-}musica;
+    struct musica *proxima; 
+    struct musica *anterior; 
+} musica;
 
-void alocarmemoria(musica **m, int n);
-void criarMusica(musica *m);
-void exibirMusica(musica *m, int n);
-void atualizarMusica(musica *m, int n);
-void deletarMusica(musica *m, int n);
-
-
-
-
-
-
-
-
-
-
-
-
+musica* criarMusica(int id, char *nome, char *artista, int duracao, char *genero); 
+void exibirPlaylist(musica *playlist);  
+void adicionarnaPlaylist(musica **playlist, musica *novaMusica);
+void inserirMusicanoInicio(musica **playlist);
+void inserirMusicanoMeio(musica **playlist);
+void inserirMusicaNoFim(musica **playlist);
+void atualizarMusica(musica **playlist, char *nome);
+void deletarMusica(musica **playlist, char *nome);
 
 #endif
