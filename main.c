@@ -4,8 +4,8 @@
 #include "crud-functions.h"
 
 int main(){
-   
-     // Configura o console para usar UTF-8, permitindo a exibição correta de caracteres acentuados
+
+    // Configura o console para usar UTF-8, permitindo a exibição correta de caracteres acentuados
     SetConsoleOutputCP(CP_UTF8);
     SetConsoleCP(CP_UTF8);
     
@@ -17,7 +17,7 @@ int main(){
 
         static musica *playlist = NULL; // Declaração estática da playlist, guardando o ultimo valor atribuído para ser usado em todas as chamadas
 
-        switch (opcao) {
+        switch(opcao){
             case 1:
                 criarplaylist(&playlist); // Chama a função para criar uma nova playlist
                 break;
