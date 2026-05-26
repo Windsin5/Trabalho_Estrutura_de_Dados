@@ -15,13 +15,15 @@ typedef struct musica {
     struct musica *anterior; 
 } musica;
 
-musica* criarMusica(int id, char *nome, char *artista, int duracao, char *genero); 
+void menu();
+musica* criarMusica(int id, char *nome, char *artista, int duracao, char *genero);
+void criarplaylist(musica **playlist);
 void exibirPlaylist(musica *playlist);  
-void adicionarnaPlaylist(musica **playlist, musica *novaMusica);
 void inserirMusicanoInicio(musica **playlist);
 void inserirMusicanoMeio(musica **playlist);
 void inserirMusicaNoFim(musica **playlist);
 void atualizarMusica(musica **playlist, char *nome);
 void deletarMusica(musica **playlist, char *nome);
+void liberarMemoria(musica **playlist);
 
 #endif
