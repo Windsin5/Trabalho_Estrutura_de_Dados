@@ -3,6 +3,8 @@
 #include <string.h>
 #include <stdlib.h>
 
+static char playlistNome[100]; // Variável global para armazenar o nome da playlist, permitindo que seja acessada em todas as funções
+
 void menu() {
     printf("Menu de Opções:\n");
     printf("1. Criar playlist\n");
@@ -16,15 +18,20 @@ void menu() {
 }
 
 void criarplaylist(musica **playlist) {
+    printf("Digite o nome da playlist: ");
+    scanf(" %[^\n]", playlistNome);
     *playlist = NULL; 
 }
 
 void exibirPlaylist(musica *playlist) {
     if (playlist == NULL) {
-        printf("A playlist está vazia.\n");
+        printf("A playlist < %s > está vazia.\n", playlistNome);
         return;
     }
-    musica *atual = playlist;
+    musica *atual = playlist; // Inicia a exibição a partir do primeiro nó da playlist
+
+    printf("\n---< %s >---\n\n", playlistNome); // Exibe o nome da playlist
+
     while (atual != NULL) {
         printf("ID: %d\n", atual->id);
         printf("Nome: %s\n", atual->nome);
@@ -69,6 +76,8 @@ void inserirMusicanoInicio(musica **playlist) {
     int id, duracao;
     char nome[100], artista[100], genero[50];
 
+     while (getchar() != '\n'); // Limpa o buffer de entrada para evitar problemas com scanf
+
     printf("\n--- INSERIR NO INÍCIO ---\n");
     printf("Digite o ID: ");
     scanf("%d", &id);
@@ -76,7 +85,7 @@ void inserirMusicanoInicio(musica **playlist) {
     scanf(" %[^\n]", nome);
     printf("Digite o Artista: ");
     scanf(" %[^\n]", artista);
-    printf("Digite a Duração (s): ");
+    printf("Digite a Duração (segundos): ");
     scanf("%d", &duracao);
     printf("Digite o Gênero: ");
     scanf(" %[^\n]", genero);
@@ -98,6 +107,8 @@ void inserirMusicaNoFim(musica **playlist) {
         inserirMusicanoInicio(playlist);
         return;
     }
+
+     while (getchar() != '\n'); // Limpa o buffer de entrada para evitar problemas com scanf
 
     int id, duracao;
     char nome[100], artista[100], genero[50];
@@ -138,6 +149,8 @@ void inserirMusicanoMeio(musica **playlist) {
 
     int id, duracao, posicao;
     char nome[100], artista[100], genero[50];
+
+     while (getchar() != '\n'); // Limpa o buffer de entrada para evitar problemas com scanf
 
     // Menu para escolher a posição de inserção
      printf("\n--- INSERIR NO MEIO ---\n");
