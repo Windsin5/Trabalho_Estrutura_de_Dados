@@ -70,6 +70,18 @@ musica* criarMusica(int id, char *nome, char *artista, int duracao, char *genero
     return novaMusica;  // Retorna o ponteiro para a nova música criada
 }
 
+int verificarID(musica *playlist, int id) {
+    musica *atual = playlist;
+    while (atual != NULL) {
+        if (atual->id == id) {
+            printf("ID já existe. Por favor, escolha um ID diferente.\n");
+            return 1; // Retorna 1 para indicar que o ID já existe
+        }
+        atual = atual->proxima;
+    }
+    return 0; // Retorna 0 para indicar que o ID não existe
+}
+
 // Funções para inserir a música no início, meio e fim da playlist
 
 void inserirMusicanoInicio(musica **playlist) {
@@ -81,6 +93,9 @@ void inserirMusicanoInicio(musica **playlist) {
     printf("\n--- INSERIR NO INÍCIO ---\n");
     printf("Digite o ID: ");
     scanf("%d", &id);
+    if (verificarID(*playlist, id) == 1) {
+        return; // Se o ID já existe, retorna para o menu principal
+    }
     printf("Digite o Nome: ");
     scanf(" %[^\n]", nome);
     printf("Digite o Artista: ");
@@ -116,6 +131,9 @@ void inserirMusicaNoFim(musica **playlist) {
     printf("\n--- INSERIR NO FIM ---\n");
     printf("Digite o ID: ");
     scanf("%d", &id);
+    if (verificarID(*playlist, id) == 1) {
+        return; // Se o ID já existe, retorna para o menu principal
+    }
     printf("Digite o Nome: ");
     scanf(" %[^\n]", nome);
     printf("Digite o Artista: ");
@@ -165,6 +183,9 @@ void inserirMusicanoMeio(musica **playlist) {
     // Menu para criar a música a ser inserida
     printf("Digite o ID: ");
     scanf("%d", &id);
+    if (verificarID(*playlist, id) == 1) {
+        return; // Se o ID já existe, retorna para o menu principal
+    }
     printf("Digite o Nome: ");
     scanf(" %[^\n]", nome);
     printf("Digite o Artista: ");
@@ -183,9 +204,16 @@ void inserirMusicanoMeio(musica **playlist) {
         atual = atual->proxima;
         contador++;
     }
+
     // Se atual for NULL, significa que a posição é maior que o número de músicas na playlist, então insere no fim
     if (atual == NULL) {
-        inserirMusicaNoFim(playlist);
+        musica *fim = *playlist;
+        while (fim->proxima != NULL) {
+            fim = fim->proxima;
+        }
+        fim->proxima = novo;
+        novo->anterior = fim;
+        printf("Música inserida no fim!\n");
         return;
     }
     // Insere a nova música antes do nó atual
@@ -199,6 +227,5 @@ void inserirMusicanoMeio(musica **playlist) {
     }
     
     atual->anterior = novo; // Atualiza o nó atual para apontar para o novo nó
-
     printf("Música inserida na posição %d!\n", posicao);
 }

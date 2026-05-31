@@ -8,14 +8,15 @@ int main(){
     // Configura o console para usar UTF-8, permitindo a exibição correta de caracteres acentuados
     SetConsoleOutputCP(CP_UTF8);
     SetConsoleCP(CP_UTF8);
-    
+
+     static musica *playlist = NULL; // Declaração estática da playlist, guardando o ultimo valor atribuído para ser usado em todas as chamadas
+
+
     while(1){
         menu(); // Exibe o menu de opções para o usuário
         int opcao;
         printf("Escolha uma opção: ");
         scanf("%d", &opcao); // Lê a opção escolhida pelo usuário
-
-        static musica *playlist = NULL; // Declaração estática da playlist, guardando o ultimo valor atribuído para ser usado em todas as chamadas
 
         switch(opcao){
             case 1:
