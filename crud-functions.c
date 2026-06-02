@@ -3,10 +3,10 @@
 #include <string.h>
 #include <stdlib.h>
 
-static char playlistNome[100]; // Variável global para armazenar o nome da playlist, permitindo que seja acessada em todas as funções
+char playlistNome[100]; // Variável global para armazenar o nome da playlist, permitindo que seja acessada em todas as funções
 
 void menu() {
-    printf("Menu de Opções:\n");
+    printf("\n\nMenu de Opções:\n\n");
     printf("1. Criar playlist\n");
     printf("2. Exibir playlist\n");
     printf("3. Inserir música no início da playlist\n");
@@ -14,7 +14,9 @@ void menu() {
     printf("5. Inserir música no fim da playlist\n");
     printf("6. Atualizar música na playlist\n");
     printf("7. Deletar música da playlist\n");
-    printf("0. Sair\n");
+    printf("8. Salvar playlist em arquivo\n");
+    printf("9. Carregar playlist de arquivo\n");
+    printf("0. Sair\n\n");
 }
 
 void criarplaylist(musica **playlist) {
@@ -228,4 +230,13 @@ void inserirMusicanoMeio(musica **playlist) {
     
     atual->anterior = novo; // Atualiza o nó atual para apontar para o novo nó
     printf("Música inserida na posição %d!\n", posicao);
+}
+void liberarMemoria(musica **playlist) {
+    musica *atual = *playlist;  // Inicia a liberação de memória a partir do primeiro nó da playlist
+    while (atual != NULL) {
+        musica *proxima = atual->proxima; // Armazena o ponteiro para a próxima música antes de liberar a memória da música atual
+        free(atual);
+        atual = proxima;
+    }
+    *playlist = NULL;   // Após liberar toda a memória, define o ponteiro da playlist como NULL para evitar acessos inválidos
 }
