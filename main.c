@@ -39,10 +39,11 @@ int main(){
                 inserirMusicaNoFim(&playlist); // Chama a função para inserir uma música no fim da playlist
                 break;
             case 6:
-                 buscarMusica(playlist);/ Chama a função responsável por buscar uma música na playlist por ID, nome ou artista
+                 buscarMusica(playlist);// Chama a função responsável por buscar uma música na playlist por ID, nome ou artista
                  break;
             case 7:
-
+                atualizarMusica(&playlist);// Chama a função para atualizar uma música existente
+                break;
             case 8:
     // deletar música (seu amigo vai fazer)
                 break;

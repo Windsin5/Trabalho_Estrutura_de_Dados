@@ -338,3 +338,147 @@ void buscarMusica(musica *playlist) {
 
     printf("Música não encontrada.\n");
 }
+// Função responsável por atualizar uma música existente na playlist
+// A música pode ser localizada pelo ID, nome ou artista
+void atualizarMusica(musica **playlist){
+
+    if (*playlist == NULL) {
+        printf("A playlist está vazia.\n");
+        return;
+    }
+
+
+    int opcao;
+    int id;
+    int duracao;
+
+    char busca[100];
+    char novoNome[100];
+    char novoArtista[100];
+    char novoGenero[50];
+
+
+    printf("\n--- ATUALIZAR MÚSICA ---\n");
+    printf("1 - Buscar por ID\n");
+    printf("2 - Buscar por nome\n");
+    printf("3 - Buscar por artista\n");
+    printf("Escolha: ");
+
+    scanf("%d", &opcao);
+
+
+    musica *atual = *playlist;
+
+
+    switch(opcao) {
+
+
+        case 1:
+
+            printf("Digite o ID: ");
+            scanf("%d", &id);
+
+
+            // Percorre a lista procurando o ID informado
+            while(atual != NULL) {
+
+                if(atual->id == id) {
+
+                    break;
+                }
+
+                atual = atual->proxima;
+            }
+
+            break;
+
+
+
+        case 2:
+
+            printf("Digite o nome da música: ");
+            scanf(" %[^\n]", busca);
+
+
+            // Percorre a lista procurando pelo nome
+            while(atual != NULL) {
+
+                if(strcmp(atual->nome, busca) == 0) {
+
+                    break;
+                }
+
+                atual = atual->proxima;
+            }
+
+            break;
+
+
+
+        case 3:
+
+            printf("Digite o artista: ");
+            scanf(" %[^\n]", busca);
+
+
+            // Percorre a lista procurando pelo artista
+            while(atual != NULL) {
+
+                if(strcmp(atual->artista, busca) == 0) {
+
+                    break;
+                }
+
+                atual = atual->proxima;
+            }
+
+            break;
+
+
+
+        default:
+            printf("Opção inválida.\n");
+            return;
+    }
+
+
+
+    // Caso tenha chegado no fim da lista e não encontrou
+    if(atual == NULL) {
+
+        printf("Música não encontrada.\n");
+        return;
+    }
+
+
+
+    printf("\nMúsica encontrada!\n");
+
+
+    printf("Novo nome: ");
+    scanf(" %[^\n]", novoNome);
+
+
+    printf("Novo artista: ");
+    scanf(" %[^\n]", novoArtista);
+
+
+    printf("Nova duração: ");
+    scanf("%d", &duracao);
+
+
+    printf("Novo gênero: ");
+    scanf(" %[^\n]", novoGenero);
+
+
+
+    // Atualiza os dados do nó encontrado
+    strcpy(atual->nome, novoNome);
+    strcpy(atual->artista, novoArtista);
+    atual->duracao = duracao;
+    strcpy(atual->genero, novoGenero);
+
+
+
+    printf("Música atualizada com sucesso!\n");
+}
