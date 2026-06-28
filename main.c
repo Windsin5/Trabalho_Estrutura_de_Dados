@@ -39,17 +39,23 @@ int main(){
                 inserirMusicaNoFim(&playlist); // Chama a função para inserir uma música no fim da playlist
                 break;
             case 6:
-                
+                 buscarMusica(playlist);/ Chama a função responsável por buscar uma música na playlist por ID, nome ou artista
+                 break;
             case 7:
 
             case 8:
-                salvarArquivo(playlist, nomeArquivo); // Chama a função para salvar a playlist atual no arquivo CSV
+    // deletar música (seu amigo vai fazer)
                 break;
+
             case 9:
-                printf("Digite o nome do arquivo da playlist a ser carregado: ");
-                scanf(" %[^\n]", nomeArquivo); // Lê o nome do arquivo da playlist
-                lerArquivo(&playlist, nomeArquivo); // Chama a função para carregar a playlist do arquivo CSV, substituindo a playlist atual na memória
-                break;                
+                 salvarArquivo(playlist, nomeArquivo); // Chama a função para salvar a playlist atual no arquivo CSV
+                break;
+
+            case 10:
+                    printf("Digite o nome do arquivo da playlist a ser carregado: ");
+                    scanf(" %[^\n]", nomeArquivo);// Lê o nome do arquivo da playlist
+                    lerArquivo(&playlist, nomeArquivo);// Chama a função para carregar a playlist do arquivo CSV, substituindo a playlist atual na memória
+                break;     
             case 0:
                 liberarMemoria(&playlist); // Chama a função para liberar a memória alocada para a playlist antes de sair do programa
                 printf("Saindo do programa...\n");

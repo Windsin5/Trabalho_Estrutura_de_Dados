@@ -12,10 +12,11 @@ void menu() {
     printf("3. Inserir música no início da playlist\n");
     printf("4. Inserir música no meio da playlist\n");
     printf("5. Inserir música no fim da playlist\n");
-    printf("6. Atualizar música na playlist\n");
-    printf("7. Deletar música da playlist\n");
-    printf("8. Salvar playlist em arquivo\n");
-    printf("9. Carregar playlist de arquivo\n");
+    printf("6. Buscar música na playlist\n");
+    printf("7. Atualizar música na playlist\n");
+    printf("8. Deletar música da playlist\n");
+    printf("9. Salvar playlist em arquivo\n");
+    printf("10. Carregar playlist de arquivo\n");
     printf("0. Sair\n\n");
 }
 
@@ -239,4 +240,101 @@ void liberarMemoria(musica **playlist) {
         atual = proxima;
     }
     *playlist = NULL;   // Após liberar toda a memória, define o ponteiro da playlist como NULL para evitar acessos inválidos
+}
+// Função responsável por buscar uma música na playlist
+// A busca pode ser feita pelo ID, nome da música ou artista
+
+void buscarMusica(musica *playlist) {
+
+    if (playlist == NULL) {
+        printf("A playlist está vazia.\n");
+        return;
+    }
+
+    int opcao;
+    int id;
+    char busca[100];
+
+    printf("\n--- BUSCAR MÚSICA ---\n");
+    printf("1 - Buscar por ID\n");
+    printf("2 - Buscar por nome\n");
+    printf("3 - Buscar por artista\n");
+    printf("Escolha: ");
+    scanf("%d", &opcao);
+
+    musica *atual = playlist;
+
+    switch(opcao) {
+
+        case 1:
+            printf("Digite o ID: ");
+            scanf("%d", &id);
+// Percorre a lista até encontrar a música desejada
+            while(atual != NULL) {
+
+                if(atual->id == id) {
+
+                    printf("\nMúsica encontrada!\n");
+                    printf("Nome: %s\n", atual->nome);
+                    printf("Artista: %s\n", atual->artista);
+                    printf("Duração: %d segundos\n", atual->duracao);
+                    printf("Gênero: %s\n", atual->genero);
+
+                    return;
+                }
+
+                atual = atual->proxima;
+            }
+
+            break;
+
+
+        case 2:
+            printf("Digite o nome da música: ");
+            scanf(" %[^\n]", busca);
+
+            while(atual != NULL) {
+
+                if(strcmp(atual->nome, busca) == 0) {
+
+                    printf("\nMúsica encontrada!\n");
+                    printf("ID: %d\n", atual->id);
+                    printf("Artista: %s\n", atual->artista);
+
+                    return;
+                }
+
+                atual = atual->proxima;
+            }
+
+            break;
+
+
+        case 3:
+            printf("Digite o artista: ");
+            scanf(" %[^\n]", busca);
+
+            while(atual != NULL) {
+
+                if(strcmp(atual->artista, busca) == 0) {
+
+                    printf("\nMúsica encontrada!\n");
+                    printf("ID: %d\n", atual->id);
+                    printf("Nome: %s\n", atual->nome);
+
+                    return;
+                }
+
+                atual = atual->proxima;
+            }
+
+            break;
+
+
+        default:
+            printf("Opção inválida.\n");
+            return;
+    }
+
+    printf("Música não encontrada.\n");
 }

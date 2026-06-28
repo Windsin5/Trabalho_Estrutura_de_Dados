@@ -24,6 +24,7 @@ void inserirMusicanoMeio(musica **playlist);
 void inserirMusicaNoFim(musica **playlist);
 void atualizarMusica(musica **playlist, char *nome);
 void deletarMusica(musica **playlist, char *nome);
+void buscarMusica(musica *playlist);
 void liberarMemoria(musica **playlist);
 
 #endif
