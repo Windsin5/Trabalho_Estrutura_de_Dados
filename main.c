@@ -12,6 +12,7 @@ int main(){
 
     static musica *playlist = NULL; // Declaração estática da playlist, guardando o ultimo valor atribuído para ser usado em todas as chamadas
     char nomeArquivo[100];
+    int id;
     extern char playlistNome[100]; // Declaração externa da variável global para acessar o nome da playlist
     
     while(1){
@@ -39,9 +40,13 @@ int main(){
                 inserirMusicaNoFim(&playlist); // Chama a função para inserir uma música no fim da playlist
                 break;
             case 6:
-                
+                atualizarMusica(playlist);
+                break;
             case 7:
-
+                printf("Digite o ID da música a ser excluída: ");
+                scanf("%d", &id);
+                excluirMusica(&playlist, id);
+                break;
             case 8:
                 salvarArquivo(playlist, nomeArquivo); // Chama a função para salvar a playlist atual no arquivo CSV
                 break;
